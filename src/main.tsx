@@ -1,17 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import RoadmapPage from './routes/index'
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RoadmapPage />,
-  },
-])
+import './styles.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      <RoadmapPage />
+    </BrowserRouter>
   </StrictMode>
 )
