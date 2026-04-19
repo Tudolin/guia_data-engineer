@@ -1,27 +1,24 @@
-import { create } from 'zustand';
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 interface ProgressState {
-  completedStages: number[];
-  markStageComplete: (stageId: number) => void;
-  resetProgress: () => void;
+  completedStages: number[]
+  markStageComplete: (stageId: number) => void
 }
 
-const loadProgress = (): number[] => {
-  const savedProgress = localStorage.getItem('userProgress');
-  return savedProgress ? JSON.parse(savedProgress) : [];
-};
-
-export const useProgressStore = create<ProgressState>((set) => ({
-  completedStages: loadProgress(),
-  markStageComplete: (stageId) =>
-    set((state) => {
-      const updatedStages = [...state.completedStages, stageId];
-      localStorage.setItem('userProgress', JSON.stringify(updatedStages));
-      return { completedStages: updatedStages };
+export const useProgressStore = create<ProgressState>()(
+  persist(
+    (set) => ({
+      completedStages: [],
+      markStageComplete: (stageId: number) =>
+        set((state) => ({
+          completedStages: state.completedStages.includes(stageId)
+            ? state.completedStages
+            : [...state.completedStages, stageId]
+        })),
     }),
-  resetProgress: () =>
-    set(() => {
-      localStorage.removeItem('userProgress');
-      return { completedStages: [] };
-    }),
-}));
+    {
+      name: 'progress-storage',
+    }
+  )
+)
