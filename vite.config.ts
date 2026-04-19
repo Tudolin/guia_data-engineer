@@ -13,6 +13,11 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
   ],
+  build: {
+    rollupOptions: {
+      external: ['zustand'],
+    },
+  },
 })
 
 export default config
