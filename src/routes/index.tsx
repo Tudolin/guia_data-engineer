@@ -1,10 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+// import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useProgressStore } from '../store/progress'
 
-export const Route = createFileRoute('/')({
-  component: RoadmapPage,
-})
+// export const Route = createFileRoute('/')({
+//   component: RoadmapPage,
+// })
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -1102,3 +1102,4 @@ function RoadmapPage() {
     </div>
   )
 }
+export default RoadmapPage
