@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "vite build"
+    "build": "vite build",
+    "prebuild": "rimraf dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -20,7 +21,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@netlify/vite-plugin-tanstack-start": "^1.2.14",
     "@tailwindcss/vite": "^4.0.6",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
@@ -31,5 +31,8 @@
     "typescript": "^5.7.2",
     "rimraf": "^6.0.1",
     "vite": "^7.1.7"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
