@@ -1,10 +1,5 @@
-// import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useProgressStore } from '../store/progress'
-
-// export const Route = createFileRoute('/')({
-//   component: RoadmapPage,
-// })
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -31,6 +26,17 @@ interface Stage {
   resources: Resource[]
   tips: string[]
   codeSnippet?: { label: string; lines: Array<{ type: string; text: string }> }
+}
+
+interface Challenge {
+  id: number
+  title: string
+  description: string
+  difficulty: 'Iniciante' | 'Intermediário' | 'Avançado'
+  category: 'SQL' | 'Python' | 'ETL' | 'Cloud'
+  question: string
+  hint: string
+  solution: string
 }
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -66,10 +72,27 @@ const stages: Stage[] = [
         free: true,
         duration: '~15h',
       },
+      {
+        title: 'What is Data Engineering?',
+        provider: 'Data Engineering Podcast',
+        type: 'Guia',
+        url: 'https://www.dataengineeringpodcast.com/',
+        description: 'Podcast semanal sobre carreira, ferramentas e práticas em Engenharia de Dados.',
+        free: true,
+      },
+      {
+        title: 'The Data Engineering Cookbook',
+        provider: 'Andreas Kretz',
+        type: 'Guia',
+        url: 'https://github.com/andkret/Cookbook',
+        description: 'Guia completo com conceitos, arquiteturas e boas práticas em Engenharia de Dados.',
+        free: true,
+      },
     ],
     tips: [
       'Faça os dois cursos da DSA em paralelo — o contexto de Engenharia de Dados vai tornar o Python mais significativo.',
       'Crie uma conta no GitHub agora mesmo. Commit seu primeiro script Python, mesmo que pequeno.',
+      'Acompanhe newsletters como "Data Engineering Weekly" para se manter atualizado.',
     ],
   },
   {
@@ -118,11 +141,28 @@ const stages: Stage[] = [
           'Exercícios de SQL com banco de dados real no navegador. Cobre SELECT, WHERE, GROUP BY, JOINs, funções de agregação e muito mais.',
         free: true,
       },
+      {
+        title: 'LeetCode Database',
+        provider: 'LeetCode',
+        type: 'Exercício',
+        url: 'https://leetcode.com/problemset/database/',
+        description: 'Centenas de desafios de SQL para praticar desde iniciante até avançado.',
+        free: true,
+      },
+      {
+        title: 'HackerRank Python',
+        provider: 'HackerRank',
+        type: 'Exercício',
+        url: 'https://www.hackerrank.com/domains/python',
+        description: 'Desafios de Python com níveis de dificuldade progressivos.',
+        free: true,
+      },
     ],
     tips: [
       'Dedique pelo menos 1h/dia praticando SQL. É a habilidade mais requisitada em entrevistas de Dados.',
       'No Python, foque em: listas, dicionários, compreensões, funções, leitura de arquivos CSV/JSON e a biblioteca requests.',
       'Instale o DBeaver (gratuito) para praticar SQL localmente com SQLite ou PostgreSQL.',
+      'Pratique no LeetCode e HackerRank diariamente.',
     ],
     codeSnippet: {
       label: 'Python + SQL no dia a dia',
@@ -185,11 +225,30 @@ const stages: Stage[] = [
         free: true,
         duration: '~60h',
       },
+      {
+        title: 'AWS Cloud Practitioner Essentials',
+        provider: 'Amazon Web Services',
+        type: 'Curso',
+        url: 'https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/',
+        description: 'Curso gratuito que cobre os fundamentos da AWS, ideal para iniciantes.',
+        free: true,
+        duration: '~6h',
+      },
+      {
+        title: 'Microsoft Azure Fundamentals (AZ-900)',
+        provider: 'Microsoft Learn',
+        type: 'Curso',
+        url: 'https://learn.microsoft.com/pt-br/training/paths/az-900-describe-cloud-concepts/',
+        description: 'Trilha gratuita para aprender os conceitos fundamentais do Azure.',
+        free: true,
+        duration: '~8h',
+      },
     ],
     tips: [
       'Os primeiros 90 dias no GCP Free Tier são generosos — crie projetos reais para praticar.',
       'Foque em BigQuery primeiro: é o produto de dados mais popular do mercado e tem 1TB de queries gratuitas/mês.',
       'AWS tem o "AWS Cloud Practitioner Essentials" gratuito; Azure tem o "AZ-900 fundamentals" — ambos excelentes como complemento.',
+      'Crie uma conta gratuita em cada cloud para explorar os serviços.',
     ],
   },
   {
@@ -238,11 +297,20 @@ const stages: Stage[] = [
           'Introdução à orquestração de pipelines de dados com Airflow. Aprenda DAGs, Operators, schedulers e como automatizar fluxos complexos.',
         free: true,
       },
+      {
+        title: 'dbt (data build tool) — Tutorial',
+        provider: 'dbt Labs',
+        type: 'Tutorial',
+        url: 'https://docs.getdbt.com/docs/introduction',
+        description: 'Transformação de dados com SQL declarativo. Padrão de mercado para ELT moderno.',
+        free: true,
+      },
     ],
     tips: [
       'Crie um projeto prático: colete dados de uma API pública (clima, moedas, criptos), salve em CSV, depois em Postgres e visualize.',
       'Scraping ético: sempre leia o robots.txt do site e adicione delays entre requisições.',
       'Para ETL mais robusto, explore dbt (data build tool) — padrão de mercado para transformações SQL declarativas.',
+      'Versionamento de dados: aprenda a usar dbt para versionar suas transformações.',
     ],
     codeSnippet: {
       label: 'Pipeline completo: API → transformação → banco',
@@ -349,13 +417,270 @@ const stages: Stage[] = [
           'Guia gratuito e abrangente com arquiteturas, tecnologias e conceitos avançados de Engenharia de Dados. Excelente para ter visão sistêmica.',
         free: true,
       },
+      {
+        title: 'Data Engineering with dbt',
+        provider: 'Coalesce 2024',
+        type: 'Curso',
+        url: 'https://www.getdbt.com/coalesce-2024',
+        description: 'Conferência anual com as melhores práticas e novidades em dbt.',
+        free: true,
+      },
     ],
     tips: [
       'A certificação GCP Professional Data Engineer custa ~$200 USD — mas o estudo para ela cobre praticamente tudo que você precisa saber.',
       'Streaming vs Batch: entenda quando usar cada um. Kafka/Pub/Sub para eventos em tempo real; Airflow para pipelines agendados.',
       'Contribua para projetos open source relacionados a dados — é a melhor forma de construir portfólio.',
+      'Mantenha um blog ou portfolio documentando seus projetos de dados.',
     ],
   },
+]
+
+// ─── Challenges Data ─────────────────────────────────────────────────────────
+
+const challenges: Challenge[] = [
+  {
+    id: 1,
+    title: 'Encontre os Clientes com Mais Compras',
+    description: 'Dada uma tabela de pedidos, encontre os top 5 clientes que mais gastaram.',
+    difficulty: 'Iniciante',
+    category: 'SQL',
+    question: `-- Tabela: pedidos (id, cliente_id, valor, data)
+-- Tarefa: Liste os top 5 clientes que mais gastaram no total
+-- Colunas esperadas: cliente_id, total_gasto
+
+SELECT cliente_id, SUM(valor) as total_gasto
+FROM pedidos
+GROUP BY cliente_id
+ORDER BY total_gasto DESC
+LIMIT 5;`,
+    hint: 'Use SUM para somar os valores e GROUP BY para agrupar por cliente.',
+    solution: 'SELECT cliente_id, SUM(valor) as total_gasto FROM pedidos GROUP BY cliente_id ORDER BY total_gasto DESC LIMIT 5;'
+  },
+  {
+    id: 2,
+    title: 'Média Móvel de Vendas',
+    description: 'Calcule a média móvel de 7 dias das vendas diárias.',
+    difficulty: 'Intermediário',
+    category: 'SQL',
+    question: `-- Tabela: vendas (data, valor)
+-- Tarefa: Calcule a média móvel de 7 dias para cada data
+-- Colunas esperadas: data, valor, media_7_dias
+
+SELECT 
+    data,
+    valor,
+    AVG(valor) OVER (
+        ORDER BY data 
+        ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+    ) as media_7_dias
+FROM vendas
+ORDER BY data;`,
+    hint: 'Use Window Functions com AVG OVER e ROWS BETWEEN.',
+    solution: 'SELECT data, valor, AVG(valor) OVER (ORDER BY data ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) as media_7_dias FROM vendas ORDER BY data;'
+  },
+  {
+    id: 3,
+    title: 'Funcionários com Salário Acima da Média do Departamento',
+    description: 'Encontre funcionários que ganham mais que a média do seu departamento.',
+    difficulty: 'Intermediário',
+    category: 'SQL',
+    question: `-- Tabelas: funcionarios (id, nome, salario, dept_id)
+-- Tabelas: departamentos (id, nome)
+-- Tarefa: Liste funcionários com salário acima da média do seu departamento
+
+SELECT f.nome, f.salario, d.nome as departamento
+FROM funcionarios f
+JOIN departamentos d ON f.dept_id = d.id
+WHERE f.salario > (
+    SELECT AVG(salario)
+    FROM funcionarios f2
+    WHERE f2.dept_id = f.dept_id
+);`,
+    hint: 'Use uma subquery para calcular a média do departamento.',
+    solution: 'SELECT f.nome, f.salario, d.nome as departamento FROM funcionarios f JOIN departamentos d ON f.dept_id = d.id WHERE f.salario > (SELECT AVG(salario) FROM funcionarios f2 WHERE f2.dept_id = f.dept_id);'
+  },
+  {
+    id: 4,
+    title: 'Validação de CPF',
+    description: 'Crie uma função que valide se um CPF é válido (incluindo dígitos verificadores).',
+    difficulty: 'Intermediário',
+    category: 'Python',
+    question: `def validar_cpf(cpf: str) -> bool:
+    """
+    Valida um CPF brasileiro.
+    
+    Args:
+        cpf: String com o CPF (pode conter pontos e traço)
+    
+    Returns:
+        True se CPF válido, False caso contrário
+    """
+    # Seu código aqui
+    pass`,
+    hint: 'Remova pontuação, verifique se tem 11 dígitos, calcule os dois dígitos verificadores.',
+    solution: `def validar_cpf(cpf: str) -> bool:
+    cpf = ''.join(filter(str.isdigit, cpf))
+    if len(cpf) != 11 or len(set(cpf)) == 1:
+        return False
+    
+    # Primeiro dígito
+    soma = sum(int(cpf[i]) * (10 - i) for i in range(9))
+    digito1 = 11 - (soma % 11)
+    if digito1 >= 10:
+        digito1 = 0
+    
+    # Segundo dígito
+    soma = sum(int(cpf[i]) * (11 - i) for i in range(10))
+    digito2 = 11 - (soma % 11)
+    if digito2 >= 10:
+        digito2 = 0
+    
+    return digito1 == int(cpf[9]) and digito2 == int(cpf[10])`
+  },
+  {
+    id: 5,
+    title: 'Análise de Logs de Servidor',
+    description: 'Processe um arquivo de log e extraia estatísticas de requisições.',
+    difficulty: 'Avançado',
+    category: 'Python',
+    question: `import re
+from collections import Counter
+from datetime import datetime
+
+def analisar_log(conteudo: str) -> dict:
+    """
+    Analisa logs no formato comum: "IP - - [DATA] "METODO /PATH HTTP/1.1" STATUS BYTES"
+    
+    Retorna um dicionário com:
+    - total_requests: número total
+    - status_mais_comum: código HTTP mais frequente
+    - endpoint_mais_acessado: path mais requisitado
+    - requests_por_hora: dicionário com hora -> contagem
+    """
+    # Seu código aqui
+    pass`,
+    hint: 'Use regex para extrair os campos: r\'(\\d+\\.\\d+\\.\\d+\\.\\d+).*?\\[(.*?)\\].*?"(.*?)".*?(\\d+)\'',
+    solution: `def analisar_log(conteudo: str) -> dict:
+    logs = conteudo.strip().split('\\n')
+    pattern = r'(\\d+\\.\\d+\\.\\d+\\.\\d+).*?\\[(.*?)\\].*?"(.*?)".*?(\\d+)'
+    
+    total = len(logs)
+    status_counter = Counter()
+    endpoint_counter = Counter()
+    hora_counter = Counter()
+    
+    for log in logs:
+        match = re.search(pattern, log)
+        if match:
+            status = match.group(4)
+            request = match.group(3)
+            endpoint = request.split()[1] if request else '/'
+            data = match.group(2)
+            hora = datetime.strptime(data, '%d/%b/%Y:%H:%M:%S %z').hour
+            
+            status_counter[status] += 1
+            endpoint_counter[endpoint] += 1
+            hora_counter[hora] += 1
+    
+    return {
+        'total_requests': total,
+        'status_mais_comum': status_counter.most_common(1)[0][0],
+        'endpoint_mais_acessado': endpoint_counter.most_common(1)[0][0],
+        'requests_por_hora': dict(hora_counter)
+    }`
+  },
+  {
+    id: 6,
+    title: 'ETL de API de Moedas',
+    description: 'Extraia dados de uma API, transforme e carregue em um formato estruturado.',
+    difficulty: 'Avançado',
+    category: 'ETL',
+    question: `import requests
+import pandas as pd
+
+def etl_moedas():
+    """
+    Extrai dados de https://api.exchangerate.host/latest
+    Transforma em DataFrame com moeda e taxa
+    Salva em CSV e retorna o DataFrame
+    """
+    # Seu código aqui
+    pass`,
+    hint: 'Use requests.get(), depois json() para extrair os rates, crie DataFrame com pandas.',
+    solution: `def etl_moedas():
+    # Extract
+    response = requests.get('https://api.exchangerate.host/latest')
+    data = response.json()
+    
+    # Transform
+    rates = data['rates']
+    df = pd.DataFrame(list(rates.items()), columns=['moeda', 'taxa'])
+    df['timestamp'] = data['date']
+    
+    # Load
+    df.to_csv('cotacoes.csv', index=False)
+    return df`
+  },
+  {
+    id: 7,
+    title: 'Tratamento de Dados Faltantes',
+    description: 'Implemente diferentes estratégias para lidar com valores nulos.',
+    difficulty: 'Intermediário',
+    category: 'ETL',
+    question: `import pandas as pd
+import numpy as np
+
+def tratar_nulos(df: pd.DataFrame, estrategia: str) -> pd.DataFrame:
+    """
+    Aplica diferentes estratégias para valores nulos.
+    
+    Args:
+        df: DataFrame com valores nulos
+        estrategia: 'remover', 'media', 'mediana', 'forward_fill'
+    
+    Returns:
+        DataFrame tratado
+    """
+    # Seu código aqui
+    pass`,
+    hint: 'Use dropna(), fillna() com diferentes métodos.',
+    solution: `def tratar_nulos(df: pd.DataFrame, estrategia: str) -> pd.DataFrame:
+    df = df.copy()
+    
+    if estrategia == 'remover':
+        return df.dropna()
+    elif estrategia == 'media':
+        return df.fillna(df.mean())
+    elif estrategia == 'mediana':
+        return df.fillna(df.median())
+    elif estrategia == 'forward_fill':
+        return df.fillna(method='ffill')
+    return df`
+  },
+  {
+    id: 8,
+    title: 'Query Otimizada no BigQuery',
+    description: 'Otimize uma query ineficiente que está consumindo muitos recursos.',
+    difficulty: 'Avançado',
+    category: 'Cloud',
+    question: `-- Query ineficiente (melhore-a)
+SELECT * FROM tabela_gigante t1
+JOIN tabela_gigante t2 ON t1.id = t2.id
+WHERE t1.data BETWEEN '2024-01-01' AND '2024-12-31'
+AND t2.status IN ('ativo', 'pendente')
+AND t1.valor > (SELECT AVG(valor) FROM tabela_gigante)
+
+-- Dicas: Use particionamento, clustering, e reduza dados antes do JOIN`,
+    hint: 'Filtre os dados antes do JOIN, use PARTITION BY, evite subqueries desnecessárias.',
+    solution: `WITH dados_filtrados AS (
+    SELECT * FROM tabela_gigante
+    WHERE data BETWEEN '2024-01-01' AND '2024-12-31'
+    AND valor > (SELECT AVG(valor) FROM tabela_gigante)
+)
+SELECT * FROM dados_filtrados t1
+JOIN dados_filtrados t2 ON t1.id = t2.id
+WHERE t2.status IN ('ativo', 'pendente')`
+  }
 ]
 
 // ─── Cloud Comparison Data ────────────────────────────────────────────────────
@@ -485,19 +810,12 @@ function StageSection({ stage, index }: { stage: Stage; index: number }) {
   const [open, setOpen] = useState(false)
   const colorVar = stage.color
 
-  const glowVar = colorVar.replace('--green', '--green-glow')
-    .replace('--blue', '--blue-glow')
-    .replace('--purple', '--purple-glow')
-    .replace('--orange', '--orange-glow')
-    .replace('--rose', '--rose-glow')
-
   return (
     <section
       id={stage.anchor}
       className={`stage-${stage.id} animate-in`}
       style={{ animationDelay: `${0.1 * (index + 1)}s`, display: 'flex', gap: 0, alignItems: 'flex-start' }}
     >
-      {/* Timeline left col */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 56, flexShrink: 0 }}>
         <div className="stage-dot">
           {String(stage.id).padStart(2, '0')}
@@ -512,7 +830,6 @@ function StageSection({ stage, index }: { stage: Stage; index: number }) {
         }} />
       </div>
 
-      {/* Content */}
       <div style={{ flex: 1, paddingLeft: 24, paddingBottom: 56 }}>
         <div
           style={{
@@ -529,7 +846,6 @@ function StageSection({ stage, index }: { stage: Stage; index: number }) {
             (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)'
           }}
         >
-          {/* Stage header */}
           <button
             onClick={() => setOpen(!open)}
             style={{
@@ -569,7 +885,6 @@ function StageSection({ stage, index }: { stage: Stage; index: number }) {
             </div>
           </button>
 
-          {/* Expanded content */}
           {open && (
             <div style={{ padding: '0 32px 32px', borderTop: '1px solid var(--border)' }}>
               <p style={{
@@ -582,7 +897,6 @@ function StageSection({ stage, index }: { stage: Stage; index: number }) {
                 {stage.description}
               </p>
 
-              {/* Resources */}
               <h3 style={{
                 fontFamily: 'JetBrains Mono', fontSize: '0.72rem', letterSpacing: '0.12em',
                 textTransform: 'uppercase', color: 'var(--text-dim)', margin: '0 0 14px',
@@ -595,7 +909,6 @@ function StageSection({ stage, index }: { stage: Stage; index: number }) {
                 ))}
               </div>
 
-              {/* Tips */}
               <h3 style={{
                 fontFamily: 'JetBrains Mono', fontSize: '0.72rem', letterSpacing: '0.12em',
                 textTransform: 'uppercase', color: 'var(--text-dim)', margin: '0 0 12px',
@@ -610,7 +923,6 @@ function StageSection({ stage, index }: { stage: Stage; index: number }) {
                 ))}
               </div>
 
-              {/* Code snippet */}
               {stage.codeSnippet && <CodeSnippet snippet={stage.codeSnippet} />}
             </div>
           )}
@@ -624,7 +936,6 @@ function CloudComparisonSection() {
   return (
     <section id="clouds" style={{ marginTop: 80, marginBottom: 80 }}>
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 24px' }}>
-        {/* Section header */}
         <div className="animate-in" style={{ marginBottom: 40, textAlign: 'center' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 16,
@@ -647,7 +958,6 @@ function CloudComparisonSection() {
           </p>
         </div>
 
-        {/* Cloud cards */}
         <div style={{
           display: 'grid', gap: 16,
           gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
@@ -715,7 +1025,6 @@ function CloudComparisonSection() {
           ))}
         </div>
 
-        {/* Equivalency table */}
         <div style={{
           background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: 16, overflow: 'hidden',
@@ -758,6 +1067,172 @@ function CloudComparisonSection() {
   )
 }
 
+function ChallengeSection() {
+  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null)
+  const [showSolution, setShowSolution] = useState(false)
+
+  const categories = ['all', 'SQL', 'Python', 'ETL', 'Cloud']
+  const difficultyColors = {
+    Iniciante: 'var(--green)',
+    Intermediário: 'var(--orange)',
+    Avançado: 'var(--rose)'
+  }
+
+  const filteredChallenges = challenges.filter(
+    c => selectedCategory === 'all' || c.category === selectedCategory
+  )
+
+  return (
+    <section id="desafios" style={{ marginTop: 80, marginBottom: 80 }}>
+      <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 24px' }}>
+        <div className="animate-in" style={{ marginBottom: 40, textAlign: 'center' }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 16,
+            padding: '6px 16px', borderRadius: 999, background: 'var(--rose-glow)',
+            border: '1px solid rgba(240, 96, 128, 0.2)',
+          }}>
+            <span style={{ fontFamily: 'JetBrains Mono', fontSize: '0.7rem', color: 'var(--rose)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              Pratique
+            </span>
+          </div>
+          <h2 style={{
+            fontFamily: 'Syne', fontWeight: 800,
+            fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
+            color: 'var(--text)', margin: '0 0 12px',
+          }}>
+            Desafios de Código
+          </h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: '60ch', margin: '0 auto', lineHeight: 1.7 }}>
+            Teste seus conhecimentos com desafios práticos de SQL, Python, ETL e Cloud.
+            Resolva cada desafio e confira a solução.
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 32, flexWrap: 'wrap' }}>
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => {
+                setSelectedCategory(cat)
+                setSelectedChallenge(null)
+                setShowSolution(false)
+              }}
+              style={{
+                padding: '8px 20px',
+                borderRadius: 999,
+                border: `1px solid ${selectedCategory === cat ? 'var(--gold)' : 'var(--border)'}`,
+                background: selectedCategory === cat ? 'var(--gold-glow-sm)' : 'var(--surface)',
+                color: selectedCategory === cat ? 'var(--gold)' : 'var(--text-muted)',
+                cursor: 'pointer',
+                fontFamily: 'JetBrains Mono',
+                fontSize: '0.8rem',
+                transition: 'all 0.2s'
+              }}
+            >
+              {cat === 'all' ? 'Todos' : cat}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ display: 'grid', gap: 16, marginBottom: 32 }}>
+          {filteredChallenges.map(challenge => (
+            <div
+              key={challenge.id}
+              onClick={() => {
+                setSelectedChallenge(challenge)
+                setShowSolution(false)
+              }}
+              style={{
+                background: 'var(--surface)',
+                border: `1px solid ${selectedChallenge?.id === challenge.id ? 'var(--gold)' : 'var(--border)'}`,
+                borderRadius: 12,
+                padding: 20,
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+                <div>
+                  <div style={{ display: 'flex', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+                    <span className="tag" style={{ background: `${difficultyColors[challenge.difficulty]}20`, color: difficultyColors[challenge.difficulty] }}>
+                      {challenge.difficulty}
+                    </span>
+                    <span className="tag" style={{ background: 'var(--blue-glow)', color: 'var(--blue)' }}>
+                      {challenge.category}
+                    </span>
+                  </div>
+                  <h3 style={{ fontFamily: 'Syne', fontSize: '1.1rem', margin: 0, color: 'var(--text)' }}>
+                    {challenge.title}
+                  </h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: 8 }}>
+                    {challenge.description}
+                  </p>
+                </div>
+                <span style={{ color: 'var(--gold)', fontSize: '1.5rem' }}>▼</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {selectedChallenge && (
+          <div style={{
+            background: 'var(--surface2)',
+            border: '1px solid var(--border)',
+            borderRadius: 16,
+            padding: 28,
+            marginTop: 32
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+              <h3 style={{ fontFamily: 'Syne', fontSize: '1.3rem', margin: 0, color: 'var(--text)' }}>
+                {selectedChallenge.title}
+              </h3>
+              <button
+                onClick={() => setShowSolution(!showSolution)}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: 8,
+                  border: '1px solid var(--gold)',
+                  background: 'transparent',
+                  color: 'var(--gold)',
+                  cursor: 'pointer',
+                  fontFamily: 'JetBrains Mono',
+                  fontSize: '0.8rem'
+                }}
+              >
+                {showSolution ? 'Esconder Solução' : 'Ver Solução'}
+              </button>
+            </div>
+
+            <div style={{ marginBottom: 24 }}>
+              <h4 style={{ color: 'var(--text-muted)', marginBottom: 12 }}>📝 Desafio:</h4>
+              <div className="code-block" style={{ fontSize: '0.8rem' }}>
+                <pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>{selectedChallenge.question}</pre>
+              </div>
+            </div>
+
+            <div style={{ marginBottom: 24 }}>
+              <h4 style={{ color: 'var(--text-muted)', marginBottom: 12 }}>💡 Dica:</h4>
+              <div style={{ padding: 12, background: 'var(--gold-glow-sm)', borderRadius: 8 }}>
+                {selectedChallenge.hint}
+              </div>
+            </div>
+
+            {showSolution && (
+              <div>
+                <h4 style={{ color: 'var(--text-muted)', marginBottom: 12 }}>✅ Solução:</h4>
+                <div className="code-block" style={{ fontSize: '0.8rem' }}>
+                  <pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>{selectedChallenge.solution}</pre>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
 // ─── Main Page ─────────────────────────────────────────────────────────────────
 
 function RoadmapPage() {
@@ -766,9 +1241,7 @@ function RoadmapPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
 
-      {/* ── Hero ─────────────────────────────────────── */}
       <div className="grid-bg" style={{ position: 'relative', overflow: 'hidden' }}>
-        {/* Radial glow behind title */}
         <div style={{
           position: 'absolute', top: '40%', left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -778,7 +1251,6 @@ function RoadmapPage() {
         }} />
 
         <div style={{ maxWidth: 960, margin: '0 auto', padding: '80px 24px 72px', textAlign: 'center', position: 'relative' }}>
-          {/* Eyebrow */}
           <div className="animate-in" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '6px 18px', borderRadius: 999,
@@ -794,7 +1266,6 @@ function RoadmapPage() {
             </span>
           </div>
 
-          {/* Title */}
           <h1 className="animate-in delay-100" style={{
             fontFamily: 'Syne', fontWeight: 800,
             fontSize: 'clamp(2.2rem, 6vw, 4rem)',
@@ -806,7 +1277,6 @@ function RoadmapPage() {
             <span style={{ color: 'var(--text)' }}>Engenheiro de Dados</span>
           </h1>
 
-          {/* Subtitle */}
           <p className="animate-in delay-200" style={{
             fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)',
             color: 'var(--text-muted)', maxWidth: '56ch', margin: '0 auto 40px',
@@ -815,14 +1285,13 @@ function RoadmapPage() {
             Do zero ao profissional. Um roteiro estruturado com recursos gratuitos para dominar Python, SQL, Cloud Computing e Engenharia de Dados na prática.
           </p>
 
-          {/* Stats */}
           <div className="animate-in delay-300" style={{
             display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 32, marginBottom: 56,
           }}>
             {[
               { value: '5', label: 'Etapas' },
               { value: '90%', label: 'Gratuito' },
-              { value: '0', label: 'Pré-requisitos' },
+              { value: '8', label: 'Desafios' },
             ].map(s => (
               <div key={s.label} style={{ textAlign: 'center' }}>
                 <div style={{
@@ -839,7 +1308,6 @@ function RoadmapPage() {
             ))}
           </div>
 
-          {/* Stage pills nav */}
           <div className="animate-in delay-400">
             <div className="stage-nav" style={{ justifyContent: 'center' }}>
               {stages.map(s => (
@@ -858,12 +1326,14 @@ function RoadmapPage() {
               <a href="#clouds" className="stage-nav-pill" style={{ '--stage-color': 'var(--gold)' } as React.CSSProperties}>
                 Guia de Clouds
               </a>
+              <a href="#desafios" className="stage-nav-pill" style={{ '--stage-color': 'var(--rose)' } as React.CSSProperties}>
+                🎯 Desafios
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Path Overview ─────────────────────────────── */}
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '48px 24px 0' }}>
         <div className="animate-in delay-500" style={{
           background: 'var(--surface)',
@@ -923,7 +1393,6 @@ function RoadmapPage() {
           </div>
         </div>
 
-        {/* Intro callout */}
         <div className="animate-in delay-600" style={{
           padding: '20px 24px',
           background: 'var(--gold-glow-sm)',
@@ -940,19 +1409,20 @@ function RoadmapPage() {
         </div>
       </div>
 
-      {/* ── Stages Timeline ───────────────────────────── */}
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 24px' }}>
         {stages.map((stage, i) => (
           <StageSection key={stage.id} stage={stage} index={i} />
         ))}
       </div>
 
-      {/* ── Cloud Comparison ──────────────────────────── */}
       <div style={{ borderTop: '1px solid var(--border)' }}>
         <CloudComparisonSection />
       </div>
 
-      {/* ── ELT with Python Section ───────────────────── */}
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <ChallengeSection />
+      </div>
+
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 24px 80px' }}>
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: 64, marginBottom: 48 }}>
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
@@ -1065,7 +1535,6 @@ function RoadmapPage() {
         </div>
       </div>
 
-      {/* ── Footer ───────────────────────────────────── */}
       <footer style={{
         borderTop: '1px solid var(--border)',
         background: 'var(--surface)',
@@ -1096,10 +1565,17 @@ function RoadmapPage() {
                 {s.title}
               </a>
             ))}
+            <a href="#desafios" style={{
+              fontSize: '0.78rem', color: 'var(--text-dim)', textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}>
+              Desafios
+            </a>
           </div>
         </div>
       </footer>
     </div>
   )
 }
+
 export default RoadmapPage

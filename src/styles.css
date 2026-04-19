@@ -48,13 +48,11 @@ code, pre {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
 
-/* Animations */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -102,7 +100,6 @@ code, pre {
 .delay-600 { animation-delay: 0.6s; }
 .delay-700 { animation-delay: 0.7s; }
 
-/* Noise texture overlay */
 .noise::after {
   content: '';
   position: fixed;
@@ -113,7 +110,6 @@ code, pre {
   opacity: 0.4;
 }
 
-/* Grid background */
 .grid-bg {
   background-image:
     linear-gradient(rgba(31, 40, 64, 0.4) 1px, transparent 1px),
@@ -121,7 +117,6 @@ code, pre {
   background-size: 48px 48px;
 }
 
-/* Stage colors */
 .stage-1 { --stage-color: var(--green); --stage-glow: var(--green-glow); }
 .stage-2 { --stage-color: var(--blue);  --stage-glow: var(--blue-glow);  }
 .stage-3 { --stage-color: var(--purple);--stage-glow: var(--purple-glow);}
@@ -162,7 +157,6 @@ code, pre {
   box-shadow: 0 0 24px 6px var(--stage-glow);
 }
 
-/* Resource card */
 .resource-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -181,7 +175,6 @@ code, pre {
   transform: translateY(-2px);
 }
 
-/* Tag badge */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -224,7 +217,6 @@ code, pre {
   border: 1px solid rgba(240, 96, 128, 0.2);
 }
 
-/* Cloud table */
 .cloud-table {
   width: 100%;
   border-collapse: collapse;
@@ -256,7 +248,6 @@ code, pre {
   background: rgba(255,255,255,0.02);
 }
 
-/* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, #a86530 100%);
   -webkit-background-clip: text;
@@ -264,14 +255,12 @@ code, pre {
   background-clip: text;
 }
 
-/* Section divider */
 .section-line {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border), transparent);
   margin: 0;
 }
 
-/* Sticky nav */
 .stage-nav {
   display: flex;
   gap: 8px;
@@ -304,7 +293,6 @@ code, pre {
   background: var(--stage-glow, var(--gold-glow-sm));
 }
 
-/* Tip box */
 .tip-box {
   background: var(--gold-glow-sm);
   border: 1px solid rgba(201, 137, 58, 0.2);
@@ -315,7 +303,6 @@ code, pre {
   color: var(--text-muted);
 }
 
-/* Code snippet */
 .code-block {
   background: #0a0d16;
   border: 1px solid var(--border);
@@ -333,7 +320,6 @@ code, pre {
 .code-func    { color: #4fa3f7; }
 .code-var     { color: #f5863c; }
 
-/* Connector line between stages */
 .connector {
   width: 2px;
   min-height: 48px;
